@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Work Time Manager</string>
+    <string name="activity_main">Time Manager</string>
+    <string name="activity_worklog">Work History</string>
+</resources>
