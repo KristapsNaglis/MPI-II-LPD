@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView dateFull;
     private String workTimeToday;
     private String breakTimeToday;
+    private boolean firstRun;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
         chronometerWorkTime.setBase(SystemClock.elapsedRealtime());
         chronometerBreakTime.setBase(SystemClock.elapsedRealtime());
+
+        firstRun = true;
 
         setUpDates();
     }
@@ -98,9 +101,13 @@ public class MainActivity extends AppCompatActivity {
             chronometerWorkTime.setBase(SystemClock.elapsedRealtime() - workTimeOffset);
             chronometerWorkTime.start();
 
-            // Break time chronometer calculate
-            chronometerBreakTime.stop();
-            breakTimeOffset = SystemClock.elapsedRealtime() - chronometerBreakTime.getBase();
+            if (!firstRun) {
+                // Break time chronometer calculate
+                chronometerBreakTime.stop();
+                breakTimeOffset = SystemClock.elapsedRealtime() - chronometerBreakTime.getBase();
+            } else {
+                firstRun = false;
+            }
 
             // Toggle working identifier
             isWorking = true;
